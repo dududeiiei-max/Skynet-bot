@@ -1,4 +1,4 @@
-const mineflayer = require('mineflayer');
+const bedrock = require('bedrock-protocol');
 const http = require('http');
 
 const server = http.createServer((req, res) => {
@@ -8,25 +8,25 @@ const server = http.createServer((req, res) => {
 server.listen(process.env.PORT || 3000);
 
 function createBot() {
-  const bot = mineflayer.createBot({
+  const client = bedrock.createClient({
     host: 'MinestableSMP.aternos.me',
     port: 13195,
     username: 'SKYNET_BOT',
-    type: 'bedrock'
+    offline: true
   });
 
-  bot.on('spawn', () => {
-    setInterval(() => {
-      bot.setControlState('jump', true);
-      setTimeout(() => bot.setControlState('jump', false), 500);
-    }, 30000);
+  client.on('join', () => {
+    console.log('Bot joined the Bedrock server successfully!');
   });
 
-  bot.on('end', () => {
+  client.on('error', (err) => {
+    console.log('Connection error:', err);
+  });
+
+  client.on('close', () => {
+    console.log('Connection closed, trying to reconnect in 10 seconds...');
     setTimeout(createBot, 10000);
   });
-
-  bot.on('error', () => {});
 }
 
 createBot();

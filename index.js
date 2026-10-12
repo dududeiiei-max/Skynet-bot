@@ -1,8 +1,15 @@
 const mineflayer = require('mineflayer');
+const http = require('http');
+
+const server = http.createServer((req, res) => {
+  res.writeHead(200, { 'Content-Type': 'text/plain' });
+  res.end('Bot is running!\n');
+});
+server.listen(process.env.PORT || 3000);
 
 function createBot() {
   const bot = mineflayer.createBot({
-    host: ''MinestableSMP.aternos.me,
+    host: 'MinestableSMP.aternos.me',
     port: 13195,
     username: 'SKYNET_BOT',
     type: 'bedrock'

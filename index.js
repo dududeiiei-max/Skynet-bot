@@ -12,7 +12,7 @@ function createBot() {
     host: 'MinestableSMP.aternos.me',
     port: 13195,
     username: 'SKYNET_BOT',
-    offline: true
+    offline: true,
     version: '1.26.52.3'
   });
 

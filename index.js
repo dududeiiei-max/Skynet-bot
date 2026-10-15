@@ -13,7 +13,6 @@ function createBot() {
     port: 13195,
     username: 'SKYNET_BOT',
     offline: true,
-    version: '1.26.52.3'
   });
 
   client.on('join', () => {
